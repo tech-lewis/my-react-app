@@ -1,7 +1,6 @@
 import React from 'react'
 import { NavLink, useRoutes } from 'react-router-dom'
-import routes from './routes'
-import './typings/index'
+import routes from './router'
 export default function Application() {
 	const element = useRoutes(routes)
 	function computedActiveStyle ({isActive}: NavLinkStyleParmasType ) {
