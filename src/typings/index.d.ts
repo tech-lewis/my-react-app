@@ -1,0 +1,3 @@
+interface NavLinkStyleParmasType {
+	isActive: boolean
+}
