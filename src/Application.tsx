@@ -23,7 +23,7 @@ const Application: React.FC = () => {
 		{
 			key: '1',
 			icon: <HomeOutlined />,
-			label: 'Hello demo',
+			label: 'Main demo',
 			path: '/home'
 		},
 		{
@@ -61,7 +61,9 @@ const Application: React.FC = () => {
   return (
     <Layout>
       <Sider trigger={null} collapsible collapsed={collapsed}>
-        <div className="demo-logo-vertical" />
+        <div className="demo-logo-vertical">
+					<h3 style={{ textAlign: 'center'}}>React Demo</h3>
+				</div>
         <Menu
           theme="dark"
           mode="inline"
