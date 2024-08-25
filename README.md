@@ -2,6 +2,11 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## 技术
+router
+- createBrowserRouter方法使用配置路由
+- Component和children的大小写要区分开
+
 ## Available Scripts
 
 In the project directory, you can run:

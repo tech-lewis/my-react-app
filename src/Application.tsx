@@ -1,45 +1,108 @@
-import React from 'react'
-import { NavLink, useRoutes } from 'react-router-dom'
+import React, { useState } from 'react';
+import {
+  MenuFoldOutlined,
+  MenuUnfoldOutlined,
+  UploadOutlined,
+	HomeOutlined,
+  VideoCameraOutlined,
+} from '@ant-design/icons';
+import { Button, Layout, Menu, theme } from 'antd';
+// import { Outlet, useNavigate } from 'react-router-dom'
+// import RoutexHome from './components/Home'
 import routes from './router'
-export default function Application() {
+import { useNavigate , useRoutes } from 'react-router-dom'
+const { Header, Sider, Content } = Layout;
+
+
+const Application: React.FC = () => {
+  const navigator = useNavigate() // Hooks编程路由导航的写法
 	const element = useRoutes(routes)
-	function computedActiveStyle ({isActive}: NavLinkStyleParmasType ) {
-		return isActive ? "list-group-item light-bg": "list-group-item"
+  const [collapsed, setCollapsed] = useState(false);
+	
+	const [menus] = useState([
+		{
+			key: '1',
+			icon: <HomeOutlined />,
+			label: 'Hello demo',
+			path: '/home'
+		},
+		{
+			key: '2',
+			icon: <VideoCameraOutlined />,
+			label: 'nav 2',
+		},
+		{
+			key: '3',
+			icon: <UploadOutlined />,
+			label: 'nav 3',
+		},
+	]);
+  const {
+    token: { colorBgContainer, borderRadiusLG },
+  } = theme.useToken();
+	// let history: NavigateFunction = null;
+	// useEffect(() => {
+	// 	history = useNavigate()
+	// 	return () => {}
+	// }, [])
+
+	function selectMenu (index: string, item?: MenuInfo) {
+		switch (index) {
+			case '1':
+				navigator('/home', {
+					replace: false
+				})
+				break;
+			case '2':
+			default:
+				break;
+		}
 	}
-	return (
-		<div>
-			<div className="row">
-				<div className="col-xs-offset-2 col-xs-8">
-					<div className="page-header"><h2>React Router Demo</h2></div>
-				</div>
-			</div>
-			<div className="row">
-				<div className="col-xs-2 col-xs-offset-2">
-					<div className="list-group">
+  return (
+    <Layout>
+      <Sider trigger={null} collapsible collapsed={collapsed}>
+        <div className="demo-logo-vertical" />
+        <Menu
+          theme="dark"
+          mode="inline"
+					style={{
+						height: '100vh'
+					}}
+          defaultSelectedKeys={['1']}
+					onClick={ (item) => {
+						console.log(item.key)
+						selectMenu(item.key)
+					}}
+          items={menus}
+        />
+      </Sider>
+      <Layout>
+        <Header style={{ padding: 0, background: colorBgContainer }}>
+          <Button
+            type="text"
+            icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+            onClick={() => setCollapsed(!collapsed)}
+            style={{
+              fontSize: '16px',
+              width: 64,
+              height: 64,
+            }}
+          />
+        </Header>
+        <Content
+          style={{
+            margin: '24px 16px',
+            padding: 24,
+            minHeight: 280,
+            background: colorBgContainer,
+            borderRadius: borderRadiusLG,
+          }}
+        >
+          {element}
+        </Content>
+      </Layout>
+    </Layout>
+  );
+};
 
-						{/* 原生html中，靠<a>跳转不同的页面 */}
-						{/* <a className="list-group-item" href="./about.html">About</a>
-                        <a className="list-group-item active" href="./home.html">Home</a> */}
-
-						{/* 在React中靠路由链接实现切换组件--编写路由链接 */}
-						<NavLink className={({isActive}) => isActive ? "list-group-item light-bg": "list-group-item"} to="/about">About</NavLink>
-						<NavLink className={computedActiveStyle} to="/home">Home</NavLink>
-					</div>
-				</div>
-				<div className="col-xs-6">
-					<div className="panel">
-						<div className="panel-body">
-							{/* 注册路由 */}
-							{element}
-							{/* <Routes>
-								<Route path="/about" element={<About />} />
-								<Route caseSensitive path="/home" element={<Home />} />
-								<Route path="/" element={<Navigate to={'/home'} />}/>
-							</Routes> */}
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	)
-}
+export default Application;

@@ -1,12 +1,12 @@
 import { Navigate, RouteObject } from 'react-router-dom'
-import Home from '../components/Home'
+import RouterHome from '../components/Home'
 import About from '../components/About'
 import Message from '../pages/Message'
 import Detail from '../pages/Message/Detail'
 const routes: RouteObject[] = [
 	{
 		path: '/home',
-		element: <Home />,
+		element: <RouterHome />,
 		children: [
 			{
 				path: 'message',
