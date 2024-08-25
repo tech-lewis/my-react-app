@@ -1,8 +1,13 @@
 import { Navigate, RouteObject } from 'react-router-dom'
 import RouterHome from '../components/Home'
-import About from '../components/About'
 import Message from '../pages/Message'
 import Detail from '../pages/Message/Detail'
+import Mall from '../pages/Mall'
+import UserManagment from '../pages/UserManagment'
+import Other from '../pages/Other/index'
+import PageOne from '../pages/Other/PageOne'
+import PageTwo from '../pages/Other/PageTwo'
+
 const routes: RouteObject[] = [
 	{
 		path: '/home',
@@ -25,9 +30,31 @@ const routes: RouteObject[] = [
 		]
 	},
 	{
-		path: '/about',
-		element: <About />
+		path: '/other',
+		element: <Other />,
+		children: [
+			{
+				path: 'pageOne',
+				element: <PageOne />
+			},
+			{
+				path: 'pageTwo',
+				element: <PageTwo />
+			}	
+		]
 	},
+	{
+		path: '/mall',
+		element: <Mall />
+	},
+	{
+		path: '/user',
+		element: <UserManagment />
+	},
+	// {
+	// 	path: '/about',
+	// 	element: <About />
+	// },
 	{
 		path: '/',
 		element: <Navigate to={'/home'} replace />
