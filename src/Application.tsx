@@ -1,42 +1,20 @@
 import React, { useState } from 'react';
 import {
   MenuFoldOutlined,
-  MenuUnfoldOutlined,
-  UploadOutlined,
-	HomeOutlined,
-  UserOutlined,
+  MenuUnfoldOutlined
 } from '@ant-design/icons';
-import { Button, Layout, Menu, theme } from 'antd';
+import { Button, Layout, theme } from 'antd';
+import ComponentAside from './components/componentAside'
 // import { Outlet, useNavigate } from 'react-router-dom'
 // import RoutexHome from './components/Home'
 import routes from './router'
-import { useNavigate , useRoutes } from 'react-router-dom'
-const { Header, Sider, Content } = Layout;
+import { useRoutes } from 'react-router-dom'
+const { Header, Content } = Layout;
 
 
 const Application: React.FC = () => {
-  const navigator = useNavigate() // Hooks编程路由导航的写法
 	const element = useRoutes(routes)
   const [collapsed, setCollapsed] = useState(false);
-	
-	const [menus] = useState([
-		{
-			key: '1',
-			icon: <HomeOutlined />,
-			label: '项目面版',
-			path: '/main'
-		},
-		{
-			key: '2',
-			icon: <UserOutlined />,
-			label: '团队管理',
-		},
-		{
-			key: '3',
-			icon: <UploadOutlined />,
-			label: 'nav 3',
-		},
-	]);
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
@@ -46,38 +24,9 @@ const Application: React.FC = () => {
 	// 	return () => {}
 	// }, [])
 
-	function selectMenu (index: string, item?: MenuInfo) {
-		switch (index) {
-			case '1':
-				navigator('/home', {
-					replace: false
-				})
-				break;
-			case '2':
-			default:
-				break;
-		}
-	}
   return (
-    <Layout>
-      <Sider trigger={null} collapsible collapsed={collapsed}>
-        <div className="demo-logo-vertical">
-					<h3 className={'app-name'}>React Demo</h3>
-				</div>
-        <Menu
-          theme="dark"
-          mode="inline"
-					style={{
-						height: '100vh'
-					}}
-          defaultSelectedKeys={['1']}
-					onClick={ (item) => {
-						console.log(item.key)
-						selectMenu(item.key)
-					}}
-          items={menus}
-        />
-      </Sider>
+    <Layout className='main-container'>
+      <ComponentAside />
       <Layout>
         <Header style={{ padding: 0, background: colorBgContainer }}>
           <Button

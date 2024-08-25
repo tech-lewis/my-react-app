@@ -2,6 +2,7 @@ import React from 'react'
 import { Link, Outlet, useOutlet, useNavigationType } from 'react-router-dom'
 import { Tabs } from 'antd';
 import type { TabsProps } from 'antd';
+import './index.css'
 // import Detail from './Detail';
 export default function Message() {
 
@@ -66,7 +67,10 @@ export default function Message() {
   ]
   return (
     <div>
-      <h2>Message选项卡</h2>
+      <div className="message-container">
+        <h2>react router 6 demo</h2>
+        <p>Message组件</p>  
+      </div>
       <Tabs defaultActiveKey="1" items={items} onChange={onChange} />
     </div>
   )
